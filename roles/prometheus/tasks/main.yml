@@ -1,10 +1,7 @@
 - name: Copy Prometheus Configuration
   ansible.builtin.template:
-    src: "{{item}}.yml"
-    dest: /opt/prometheus/{{item}}.yml
-  loop:
-    - prometheus
-    - alerts
+    src: prometheus.yml
+    dest: /opt/prometheus/prometheus.yml
 
 - name: Restart Prometheus
   ansible.builtin.systemd:
@@ -13,7 +10,6 @@
 
 #- name: Check if prometheus is running or not
 #  ansible.builtin.shell: sleep 10 ; netstat -lntp | grep 9090
-# ansible
 
 - name: Wait for Prometheus is started or not
   ansible.builtin.wait_for:
